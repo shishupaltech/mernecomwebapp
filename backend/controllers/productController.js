@@ -25,7 +25,7 @@ exports.updateProduct = async(req,res,next)=>{
     let product = Product.findById(req.params.id);
     if(!product){
         return res.status(500).json({
-            success:true,
+            success:false,
             message:"Product not found"
         })
     }
@@ -38,5 +38,23 @@ exports.updateProduct = async(req,res,next)=>{
     res.status(200).json({
         success:true,
         product
+    })
+}
+
+// Delete product 
+
+exports.deleteProduct = async(req,res,next)=>{
+    const product = await Product.findById(req.params.id);
+    if(!product){
+        return res.status(500).json({
+            success:false,
+            message:"Product not found"
+        })
+    }
+    // remove() is deprecated by deleteOne() Or DeleteMany();
+    await product.deleteOne();
+    res.status(200).json({
+        success:true,
+        message:"Product Delete Successfully"
     })
 }
