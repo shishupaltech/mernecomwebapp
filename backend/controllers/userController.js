@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const sendToken = require("../utils/jwtToken");
 
 // Registration a user 
 
@@ -49,12 +50,17 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
 
     }
 
-    const token = user.getJWTToken();
+    // this line is repeating everytime so create the function for that.
 
-    res.status(200).json({
-        success:true,
-        token,
-    });
+    // const token = user.getJWTToken();
+
+    // res.status(200).json({
+    //     success:true,
+    //     token,
+    // });
+    // end here
+    
+
 
 
 
