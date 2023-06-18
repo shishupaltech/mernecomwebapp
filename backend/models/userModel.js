@@ -1,6 +1,7 @@
 const mongoose  = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -39,7 +40,6 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken:String,
     resetPasswordExpire:Date,
-
 });
 
 userSchema.pre("save",async function(next){
@@ -49,4 +49,14 @@ userSchema.pre("save",async function(next){
     
     this.password = await bcrypt.hash(this.password,10);
 })
+
+// JWT TOKEN 
+// this is method 
+// it is used when we register then direct login at the moment of register.
+userSchema.methods.getJWTToken = function(){
+    return jwt.sign({id:this._id},process.env.JWT_SECRET,{
+        expiresIn:process.env.jWT_EXPIRE,  
+    });// id which is genereated by mongodb ' _id'
+
+};
 module.exports = mongoose.model("User",userSchema);
