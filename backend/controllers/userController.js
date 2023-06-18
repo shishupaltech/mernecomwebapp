@@ -15,13 +15,7 @@ exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
             url:"profilepicUrl"
         },
     });
-
-    const token = user.getJWTToken();
-
-    res.status(201).json({
-        success:true,
-        token,
-    });
+    sendToken(user,2001,res);
 
 });
 
@@ -29,6 +23,7 @@ exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
 
 exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
     const {email,password} = req.body;
+    
 
     // checking if user has given password and email both 
 
@@ -38,6 +33,7 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
         
     }
     const user =await User.findOne({email}).select("+password");//+(plus password means password can get because we given false that's why we add + to access the password)
+ 
     if(!user){
         return next(new ErrorHandler("Invalid email or password",401));
 
@@ -45,23 +41,9 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
 
     const isPasswordMatched = user.comparePassword(password);
 
-    if(!user){
+    if(isPasswordMatched){
         return next(new ErrorHandler("Invalid email or password",401));
 
     }
-
-    // this line is repeating everytime so create the function for that.
-
-    // const token = user.getJWTToken();
-
-    // res.status(200).json({
-    //     success:true,
-    //     token,
-    // });
-    // end here
-    
-
-
-
-
-})
+    sendToken(user,401,res);
+});
