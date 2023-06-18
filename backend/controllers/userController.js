@@ -23,3 +23,39 @@ exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
     });
 
 });
+
+// login User 
+
+exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
+    const {email,password} = req.body;
+
+    // checking if user has given password and email both 
+
+    if(!email || !password){
+        return next(new ErrorHandler("Please Enter Email & Password",400));
+
+        
+    }
+    const user =await User.findOne({email}).select("+password");//+(plus password means password can get because we given false that's why we add + to access the password)
+    if(!user){
+        return next(new ErrorHandler("Invalid email or password",401));
+
+    }
+
+    const isPasswordMatched = user.comparePassword(password);
+
+    if(!user){
+        return next(new ErrorHandler("Invalid email or password",401));
+
+    }
+
+    const token = user.getJWTToken();
+
+    res.status(200).json({
+        success:true,
+        token,
+    });
+
+
+
+})
