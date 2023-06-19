@@ -3,9 +3,12 @@ const { getAllProducts,createProduct, updateProduct, deleteProduct, getProductDe
 const isAuthenticationUser = require("../middleware/auth");
 
 const router = express.Router();
-router.route("/products").get(isAuthenticationUser ,getAllProducts);
-router.route("/product/new").post(createProduct);
+router.route("/products").get(getAllProducts);
+router.route("/product/new").post(isAuthenticationUser ,createProduct);
 // url same hai to multiple request you can add with same url
-router.route("/product/:id").put(updateProduct).delete(deleteProduct).get(getProductDetails);
+router.route("/product/:id")
+.put(isAuthenticationUser ,updateProduct)
+.delete(isAuthenticationUser ,deleteProduct)
+.get(getProductDetails);
 
 module.exports = router;

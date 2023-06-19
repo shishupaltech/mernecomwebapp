@@ -20,12 +20,14 @@ exports.getAllProducts = catchAsyncErrors(async (req,res)=>{
     const products = await apiFeatures.query;
     res.status(200).json({
         success:true,
-        products
+        products,
+        productCount
     })
 });
 // GET PRODUCT DETAILS 
 exports.getProductDetails = catchAsyncErrors(async(req,res,next)=>{
     const product = await Product.findById(req.params.id);
+    const productCount = await Product.countDocuments();
     if(!product){
         return next(new ErrorHandler("Product not found",404));
     }
