@@ -15,7 +15,7 @@ exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
             url:"profilepicUrl"
         },
     });
-    sendToken(user,2001,res);
+    sendToken(user,201,res);
 
 });
 
@@ -23,6 +23,7 @@ exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
 
 exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
     const {email,password} = req.body;
+    // console.log(email+ "and " + password);
     
 
     // checking if user has given password and email both 
@@ -32,8 +33,8 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
 
         
     }
-    const user =await User.findOne({email}).select("+password");//+(plus password means password can get because we given false that's why we add + to access the password)
- 
+    const user =await User.findOne({email}).select("password");//+(plus password means password can get because we given false that's why we add + to access the password)
+    // console.log(user);
     if(!user){
         return next(new ErrorHandler("Invalid email or password",401));
 
@@ -41,7 +42,7 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
 
     const isPasswordMatched = user.comparePassword(password);
 
-    if(isPasswordMatched){
+    if(!isPasswordMatched){
         return next(new ErrorHandler("Invalid email or password",401));
 
     }
