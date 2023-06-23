@@ -9,6 +9,6 @@ router.route("/product/new").post(isAuthenticationUser ,autherizeRoles("admin"),
 router.route("/product/:id")
 .put(isAuthenticationUser ,autherizeRoles("admin"),updateProduct)
 .delete(isAuthenticationUser ,autherizeRoles("admin"),deleteProduct)
-.get(getProductDetails);
+router.route("/product/:id").get(getProductDetails);
 
 module.exports = router;
