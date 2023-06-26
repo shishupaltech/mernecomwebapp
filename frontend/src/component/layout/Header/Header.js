@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
-import logo from "../../../images/logo.jpeg";
+import logo from "../../../images/logoremove.png";
 
 import { MdAccountCircle } from "react-icons/md";
 import { MdSearch } from "react-icons/md";
@@ -13,7 +13,7 @@ const Header = () => {
       logo={logo}
       logoWidth="20vmax"
       logoRadius="50%"
-      navColor1="rgba(0,0,0,0.4)"
+      navColor1="blue"
       logoHoverSize="10px"
       logoHoverColor="#eb4034"
       link1Text="Home"
@@ -25,16 +25,16 @@ const Header = () => {
       link3Url="/contact"
       link4Url="/about"
       link1Size="1.3vmax"
-      link1Color="rgba(35,35,35,0.8)"
+      link1Color="white"
       nav1justifyContent="flex-end"
       nav2justifyContent="flex-end"
       nav3justifyContent="flex-start"
       nav4justifyContent="flex-start"
       link1ColorHover="#eb4034"
       link1Margin="1vmax"
-      profileIconColor="rgba(35,35,35,0.8)"
-      searchIconColor="rgba(35,35,35,0.8)"
-      cartIconColor="rgba(35,35,35,0.8)"
+      profileIconColor="white"
+      searchIconColor="white"
+      cartIconColor="white"
       profileIconColorHover="#eb4035"
       searchIconColorHover="#eb4035"
       cartIconColorHover="#eb4035"
