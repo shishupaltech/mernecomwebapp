@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import {CgMouse} from 'react-icons/cg';
 import Product from "./Product.js";
+import MetaData from '../layout/MetaData.js';
 
 import './Home.css'
 const product = {
@@ -12,6 +13,7 @@ const product = {
 
 const Home = () => {
   return <Fragment>
+        <MetaData title="ECOMMERCE"/>
         <div className='banner'>
             <p>Welcome to Ecommerse</p>
             <h1>FIND AMAZING PRODUCTS BELOW</h1>
