@@ -15,7 +15,7 @@ footer{
 }
 .leftFooter > h4{
     font-family: "Franklin Gothic Medium", "Arial Narrow", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1vmax;
+    font-size: 1.2vmax;
 }
 .leftFooter > p{
     text-align: center;
@@ -44,7 +44,7 @@ footer{
 }
 .rightFooter > h4{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.4vmax;
+    font-size: 1vmax;
     text-decoration: underline;
 }
 .rightFooter >a {
